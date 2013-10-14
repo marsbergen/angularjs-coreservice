@@ -1,0 +1,29 @@
+{
+	"name": "angularjs-coreservice",
+	"version": "0.2.0",
+	"homepage": "https://github.com/marsbergen/angularjs-coreservice",
+	"authors": [
+		"Patrick van Marsbergen <patrick@mimbee.nl>"
+	],
+	"description": "A base service for REST API requests",
+	"main": "core.js",
+	"keywords": [
+		"angularjs",
+		"rest",
+		"api",
+		"service"
+	],
+	"license": "MIT",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"angular-unstable": "~1.1.5",
+		"angular-resource-unstable": "~1.1.5",
+		"jquery": "~1.10.2"
+	}
+}
