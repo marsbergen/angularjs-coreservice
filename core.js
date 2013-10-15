@@ -33,7 +33,7 @@ angular.module('CoreService', [])
 				 * @param errorCallback This callback is called after data requested ended up with another HTTP than 20x
 				 * @returns $resource object
 				 */
-				find: function(query, successCallback) {
+				find: function(query, successCallback, errorCallback) {
 					// Check if given query is a function and no successCallback was given.
 					// If so the query will be the callBack and there won't be a real query
 					var getType = {};
