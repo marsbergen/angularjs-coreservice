@@ -93,15 +93,29 @@ angular.module('CoreService', [])
 
 				/**
 				 * AppVariants.delete(1)
-				 * AppVariants.delete(1, function() { alert('done'); });
+				 * AppVariants.delete(1, function() { alert('done'); }, function() { alert('error') });
+				 * AppVariants.delete({id: 1}, function() { alert('done'); }, function() { alert('error') });
+				 * AppVariants.delete(function() { alert('done'); }, function() { alert('error') });
 				 *
 				 * @param id string Enter the primary key
 				 * @param successCallback This callback is called after data requested ended up with a HTTP 20x
 				 * @param errorCallback This callback is called after data requested ended up with another HTTP than 20x
 				 * @returns $resource object
 				 */
-				delete: function(id, successCallback, errorCallback) {
-					return Request.delete({id: id}, successCallback, errorCallback);
+				delete: function(query, successCallback, errorCallback) {
+					var getType = {};
+					if(query && getType.toString.call(query) === '[object Function]')
+					{
+						successCallback = query;
+						errorCallback = successCallback;
+						query = undefined;
+					}
+					else if(query && getType.toString.call(query) !== '[object Object]')
+					{
+						query = {id: query};
+					}
+
+					return Request.delete(query, successCallback, errorCallback);
 				},
 
 				/**
