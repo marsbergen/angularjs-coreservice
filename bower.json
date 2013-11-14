@@ -1,6 +1,6 @@
 {
 	"name": "angularjs-coreservice",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"homepage": "https://github.com/marsbergen/angularjs-coreservice",
 	"authors": [
 		"Patrick van Marsbergen <patrick@mimbee.nl>"
@@ -22,8 +22,8 @@
 		"tests"
 	],
 	"dependencies": {
-		"angular-unstable": "~1.1.5",
-		"angular-resource-unstable": "~1.1.5",
+		"angular": "~1.2.0",
+		"angular-resource": "~1.2.0",
 		"jquery": "~1.10.2"
 	}
 }

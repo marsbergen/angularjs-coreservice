@@ -19,10 +19,13 @@ angular.module('CoreService', [])
 				}
 			};
 
+			var url = ApiHostname + '/'+location;
+
 			actions = $.extend(defaultActions, actions);
-			var Request = $resource(ApiHostname + '/'+location, data, actions);
+			var Request = $resource(url, data, actions);
 
 			return {
+				url: url,
 				/**
 				 * AppVariants.find({id: 1})
 				 * AppVariants.find({id: 1}, function() { alert('done'); });
