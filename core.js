@@ -1,21 +1,27 @@
 'use strict';
 
 angular.module('CoreService', [])
-	.factory('Service', ['$resource', 'ApiHostname', function($resource, ApiHostname) {
+	.factory('Service', ['$q', '$resource', 'ApiHostname', function($resource, ApiHostname) {
 		return function(location, data, actions) {
+			var canceler = $q.defer();
+
 			var defaultActions = {
 				update: {
-					method: 'PUT'
+					method: 'PUT',
+					timeout: canceler.promise
 				},
 				get: {
-					method: 'GET'
+					method: 'GET',
+					timeout: canceler.promise
 				},
 				delete: {
-					method: 'DELETE'
+					method: 'DELETE',
+					timeout: canceler.promise
 				},
 				query: {
 					method: 'GET',
-					isArray: true
+					isArray: true,
+					timeout: canceler.promise
 				}
 			};
 
@@ -146,6 +152,10 @@ angular.module('CoreService', [])
 				 */
 				update: function(data, successCallback, errorCallback) {
 					return Request.update(data, successCallback, errorCallback);
+				},
+
+				cancelRequest: function() {
+					return canceler.resolve();
 				}
 			};
 		};
