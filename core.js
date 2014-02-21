@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('CoreService', [])
-	.factory('Service', ['$q', '$resource', 'ApiHostname', function($resource, ApiHostname) {
+	.factory('Service', ['$q', '$resource', 'ApiHostname', function($q, $resource, ApiHostname) {
 		return function(location, data, actions) {
 			var canceler = $q.defer();
 
@@ -14,7 +14,7 @@ angular.module('CoreService', [])
 					method: 'GET',
 					timeout: canceler.promise
 				},
-				delete: {
+				remove: {
 					method: 'DELETE',
 					timeout: canceler.promise
 				},
@@ -101,17 +101,17 @@ angular.module('CoreService', [])
 				},
 
 				/**
-				 * AppVariants.delete(1)
-				 * AppVariants.delete(1, function() { alert('done'); }, function() { alert('error') });
-				 * AppVariants.delete({id: 1}, function() { alert('done'); }, function() { alert('error') });
-				 * AppVariants.delete(function() { alert('done'); }, function() { alert('error') });
+				 * AppVariants.remove(1)
+				 * AppVariants.remove(1, function() { alert('done'); }, function() { alert('error') });
+				 * AppVariants.remove({id: 1}, function() { alert('done'); }, function() { alert('error') });
+				 * AppVariants.remove(function() { alert('done'); }, function() { alert('error') });
 				 *
 				 * @param id string Enter the primary key
 				 * @param successCallback This callback is called after data requested ended up with a HTTP 20x
 				 * @param errorCallback This callback is called after data requested ended up with another HTTP than 20x
 				 * @returns $resource object
 				 */
-				delete: function(query, successCallback, errorCallback) {
+				remove: function(query, successCallback, errorCallback) {
 					var getType = {};
 					if(query && getType.toString.call(query) === '[object Function]')
 					{
@@ -124,7 +124,7 @@ angular.module('CoreService', [])
 						query = {id: query};
 					}
 
-					return Request.delete(query, successCallback, errorCallback);
+					return Request.remove(query, successCallback, errorCallback);
 				},
 
 				/**
