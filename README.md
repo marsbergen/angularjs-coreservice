@@ -4,6 +4,10 @@ A base (model) class for services using Angular's Resource module
 
 ## Installation
 
+Install via Bower
+
+	bower install --save angularjs-coreservice
+
 Add the `ApiHostname` as a constant to your AngularJS Application.
 The Coreserver depends on this constant.
 
