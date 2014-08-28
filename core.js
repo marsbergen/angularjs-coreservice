@@ -88,16 +88,37 @@ angular.module('CoreService', [])
 				},
 
 				/**
-				 * AppVariants.findByPk(1)
-				 * AppVariants.findByPk(1, function() { alert('done'); });
+				 * ***DEPRECATED***
 				 *
-				 * @param id string Enter the primary key
+				 * Alias for findById
+				 */
+				findByPk: function(id, successCallback, errorCallback) {
+					return this.findById(id, successCallback, errorCallback);
+				},
+
+				/**
+				 * AppVariants.findById(1)
+				 * AppVariants.findById(1, function() { alert('done'); });
+				 *
+				 * @param id string The identifier to request
 				 * @param successCallback This callback is called after data requested ended up with a HTTP 20x
 				 * @param errorCallback This callback is called after data requested ended up with another HTTP than 20x
 				 * @returns $resource object
 				 */
-				findByPk: function(id, successCallback, errorCallback) {
+				findById: function(id, successCallback, errorCallback) {
 					return this.find({id:id}, successCallback, errorCallback);
+				},
+
+				/**
+				 * AppVariants.delete(1)
+				 * AppVariants.delete(1, function() { alert('done'); }, function() { alert('error') });
+				 * AppVariants.delete({id: 1}, function() { alert('done'); }, function() { alert('error') });
+				 * AppVariants.delete(function() { alert('done'); }, function() { alert('error') });
+				 *
+				 * Alias for remove
+				 */
+				delete: function(query, successCallback, errorCallback) {
+					return this.remove(query, successCallback, errorCallback);
 				},
 
 				/**
@@ -113,14 +134,12 @@ angular.module('CoreService', [])
 				 */
 				remove: function(query, successCallback, errorCallback) {
 					var getType = {};
-					if(query && getType.toString.call(query) === '[object Function]')
-					{
+					if(query && getType.toString.call(query) === '[object Function]') {
 						successCallback = query;
 						errorCallback = successCallback;
 						query = undefined;
 					}
-					else if(query && getType.toString.call(query) !== '[object Object]')
-					{
+					else if(query && getType.toString.call(query) !== '[object Object]') {
 						query = {id: query};
 					}
 
@@ -137,6 +156,24 @@ angular.module('CoreService', [])
 				 * @returns $resource object
 				 */
 				save: function(data, successCallback, errorCallback) {
+					if (data.id === undefined) {
+						return this.create(data, successCallback, errorCallback);
+					}
+					else {
+						return this.update(data, successCallback, errorCallback);
+					}
+				},
+
+				/**
+				 * AppVariants.create({name: 'Mr. Dinges'})
+				 * AppVariants.create({name: 'Mr. Dinges'}, function() { alert('done'); });
+				 *
+				 * @param data object An object with the data you want to save
+				 * @param successCallback This callback is called after data requested ended up with a HTTP 20x
+				 * @param errorCallback This callback is called after data requested ended up with another HTTP than 20x
+				 * @returns $resource object
+				 */
+				create: function(data, successCallback, errorCallback) {
 					var request = new Request(data);
 					return request.$save(successCallback, errorCallback);
 				},
