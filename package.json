@@ -1,0 +1,23 @@
+{
+  "name": "angularjs-coreservice",
+  "version": "1.0.0",
+  "description": "A base service for RESTFull API requests",
+  "main": "core.js",
+  "author": {
+    "name": "Patrick van Marsbergen",
+    "email": "patrick@mimbee.nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marsbergen/angularjs-coreservice.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marsbergen/angularjs-coreservice/issues"
+  },
+  "homepage": "https://github.com/marsbergen/angularjs-coreservice#readme",
+  "devDependencies": {
+    "angular": "^1.4.2",
+    "angular-resource": "^1.4.2"
+  }
+}

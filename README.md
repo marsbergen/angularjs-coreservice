@@ -8,6 +8,10 @@ Install via Bower
 
 	bower install --save angularjs-coreservice
 
+Install via NPM
+
+	npm install --save-dev angularjs-coreservice
+
 Add the `ApiHostname` as a constant to your AngularJS Application.
 The Coreserver depends on this constant.
 
